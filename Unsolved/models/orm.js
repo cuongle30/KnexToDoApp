@@ -4,12 +4,12 @@
 
 // Dependencies
 // =============================================================
-var connection = require('./connection.js')
+var connection = require('../config/connection.js')
 
 // ORM
 // =============================================================
 
-class ORMISH {
+class Todo {
   constructor (table = 'todo') {
     this.table = table
   }
@@ -59,4 +59,4 @@ class ORMISH {
   }
 };
 
-module.exports = new ORMISH()
+module.exports = new Todo()

@@ -1,66 +1,43 @@
-# **Folder**: `07-ORM-To-Knex/Unsolved`
 
-## **INSTRUCTIONS**
+# **INSTRUCTIONS**
 
-The goal of this exercise is to set up the app foundation
+The goal of this exercise is to create the foundation of our Todo model and implement functionality to retrieve all Todos from the database using Knex.
 
-### App Set Up
+## Todo Model Set Up
 
-* [ ] Open the folder `07-ORM-To-Knex/Unsolved`, and run `npm install`
-* [ ] Create a `'knex_todolist_db` DB using the `'schema.sql'`
-* [ ] Follow the instructions [here](https://knexjs.org/#Migrations-CLI) to generate a `knexfile.js`
-* [ ] Modify the `knexfile.js` so it includes your MySQL connection configuration information. See example below:
-
-```javascript
-module.exports = {
-  client: "mysql",
-  connection: {
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "",
-    database: "knex_todolist_db",
-    debug: ['ComQueryPacket', 'RowDataPacket']
-  }
-};
-```
-
-* [ ] Modify the `/config/connection.js` so that it only connects to MySQL using Knex.js. You should use your `knexfile.js` to instantiate your knex instance. See example below:
+* [ ] Create a `models` folder in the root of your app
+* [ ] Move the `/config/orm.js` to your new `/models` folder
+* [ ] Change the connection dependency variable name to `knex` (this is optional but is good practice)
+* [ ] Rename the class name to `Todo` and make sure to rename all references to that class name
+* [ ] Add a scaffold to seperate your new code from your old code (optional). See example:
 
 ```javascript
-// Creates mySQL connection using Knex.js
-const Knex = require('knex')(require('../../knexfile'))
+// BEGIN NEW CODE
 
-// Exports the connection for other files to use
-module.exports = Knex;
+// END NEW CODE
+
+// The old code will be underneath
 ```
 
-### Schema Set Up
+## Now Let's Code
 
-* [ ] Follow the instructions [here](https://knexjs.org/#Migrations-CLI) to generate a migration file named `'create_todo_table'`.
-* [ ] Within your migration file write the code to create a `'todo'` table.
+### At this point you should have the Knex.js [documentation](https://knexjs.org/#Builder) and or [cheatsheet](https://devhints.io/knex) open for reference
 
-  * Your `'todo'` table must include the following column definitions:
-    * id: [auto-increment, primary key],
-    * text: [varchar (255), not null],
-    * completed: [boolean, default false],
-    * created_at: [timestamp],
-    * updated_at: [timestamp]
+* [ ] In `/models/todo.js` implement a `findAll` function that selects all todos from the `'todo'` table.
+* [ ] In your `/routes/api-routes.js` modify the dependencies to pull in your new `models/todo.js` file.
+* [ ] Modify the GET route for getting all todos to make it use your Todo model.
 
-  * *USE THE [DOCUMENTATION](https://knexjs.org/#Schema-Building) TO CREATE THE APPROPRIATE COLUMN DATA TYPES*
-  * Check [this example](https://knexjs.org/#Migrations-API-transactions) to confirm that your migration file is properly formatted
+### Time to test
 
-* [ ] Follow the instructions [here](https://knexjs.org/#Migrations-CLI) to run your migration file to create your `'todo'` table.
+* [ ] Run `npm start` in your terminal. If there are any issues **ASK FOR HELP** if you can't figure out what's going on.
+* [ ] If there are no issues, go to `localhost:8080` in your browser
+* [ ] If you see your seeded todos, you're good!
+* [ ] If not, **ASK FOR HELP**
 
-* [ ] From SQL Workbench confirm that your `'todo'` table was created.
+If your first method is working, CONGRATS, now move on to the next function!
 
-### Seed Setup
+* [ ] In `/models/todo.js` implement a `create` function that inserts a todo into the `'todo'` table.
+* [ ] In your `/routes/api-routes.js` modify the POST route for saving a new todo to make it use your Todo model.
+* [ ] Test your refactored functionality by trying to enter a new Todo from the browser.
 
-* [ ] Follow the instructions [here](https://knexjs.org/#Seeds-CLI) to generate a seed file named `'todo_seed'`.
-* [ ] Within your seed file modify the boilerplate function and insert 2 or 3  todo tasks.
-
-* [ ] Follow the instructions [here](https://knexjs.org/#Seeds-CLI) to run your seed file to insert your seed data.
-
-* [ ] From SQL Workbench confirm that your `'todo'` table has your test data.
-
-### Great Job
+### W00T Let's Move On
